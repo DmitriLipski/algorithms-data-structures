@@ -3,8 +3,19 @@
 // maxChar("I loveeeeeee noodles") === "e"
 // maxChar("1337") === "3"
 
-function maxChar(str) {}
+function maxChar(str) {
+  const charMap = str.split("").reduce((res, char) => {
+    const key = res[char] ? { [char]: ++res[char] } : { [char]: 1 };
+    return { ...res, ...key }
+  }, {});
 
+  const arrayOfValues = Object.values(charMap);
+  const maxValue = Math.max(...arrayOfValues);
+  const indexOfMaxValue = arrayOfValues.indexOf(maxValue);
+
+  return Object.keys(charMap)[indexOfMaxValue];
+}
+console.log(maxChar("I loveeeeeee noodles"));
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
 //    ) (   | (    \/| (    \/   ) (     | (    \/| (   ) || (    \/| (    \/| (    \/
