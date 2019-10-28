@@ -6,7 +6,19 @@
 // chunk(["a", "b", "c", "d"], 2) --> [[ "a", "b"], ["c", "d"]]
 // chunk([0, 1, 2, 3, 4, 5], 4) -->  [[0, 1, 2, 3], [4, 5]]
 
-function chunk(array, size) {}
+function chunk(array, size) {
+  const result = [];
+
+  for (let i = 0; i < array.length - size; i++) {
+    let firstIndex = size * i;
+    let secondIndex = firstIndex + size;
+    result.push(array.slice(firstIndex, secondIndex))
+  }
+
+  return result;
+}
+
+console.log("result =>", chunk([0, 1, 2, 3, 4, 5], 4));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
