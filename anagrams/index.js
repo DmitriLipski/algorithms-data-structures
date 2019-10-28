@@ -8,7 +8,23 @@
 //   anagrams('Heart!', 'EARTH') --> True
 //   anagrams('lol', 'lolc') --> False
 
-function anagrams(stringA, stringB) {}
+function anagrams(stringA, stringB) {
+  let isAnagrams = false;
+  const stringAMapper = stringA
+      .toLowerCase()
+      .split("")
+      .reduce((mapper, letter) => {
+        return { ...mapper, [letter]: 1 };
+        }, {});
+
+  stringB.toLowerCase().split("").forEach((letter) => {
+    isAnagrams = (letter in stringAMapper)
+  });
+
+  return isAnagrams;
+}
+
+console.log("result =>", anagrams("heart", "earth"));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
