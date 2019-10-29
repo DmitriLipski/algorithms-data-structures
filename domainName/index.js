@@ -1,29 +1,11 @@
-// Write a function that accepts a positive number N.
-// The function should console log a pyramid shape
-// with N levels using the # character.  Make sure the
-// pyramid has spaces on both the left and right side
-// --- Examples
-//   pyramid(1)
-//       '#'
-//   pyramid(2)
-//       ' # '
-//       '###'
-//   pyramid(3)
-//       '  #  '
-//       ' ### '
-//       '#####'
+// Write a function that when given a URL as a string, parses out just the domain name and returns it as a string.
 
-function pyramid(n) {
-  for (let i = 0; i < n; i++) {
-    console.log(" ".repeat(n - i - 1) + "#".repeat(2 * i + 1) + " ".repeat(n - i - 1))
-  }
+
+function domainName(url) {
+    return url.replace(/^http[s]?\:\/\//, "").replace("www.", "").split(".")[0]
 }
 
-function high(x){
-
-}
-
-console.log("result =>", high(""))
+console.log("result =>", domainName("http://google.com"));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -50,16 +32,14 @@ console.log("result =>", high(""))
 
 mocha.setup("bdd");
 const { assert } = chai;
-console.log = sinon.spy();
 
-describe("Pyramid", () => {
-  it("pyramid() works", () => {
-    pyramid(3);
-    assert.equal(console.log.callCount, 3);
-    assert.equal(console.log.getCall(0).args[0], "  #  ");
-    assert.equal(console.log.getCall(1).args[0], " ### ");
-    assert.equal(console.log.getCall(2).args[0], "#####");
-  });
+describe("domainName", () => {
+    it("works great", () => {
+        assert.equal(domainName("http://google.com"), "google");
+        assert.equal(domainName("http://google.co.jp"), "google");
+        assert.equal(domainName("www.xakep.ru"), "xakep");
+        assert.equal(domainName("https://youtube.com"), "youtube");
+    });
 });
 
 mocha.run();

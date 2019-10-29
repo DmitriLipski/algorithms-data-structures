@@ -1,29 +1,28 @@
-// Write a function that accepts a positive number N.
-// The function should console log a pyramid shape
-// with N levels using the # character.  Make sure the
-// pyramid has spaces on both the left and right side
-// --- Examples
-//   pyramid(1)
-//       '#'
-//   pyramid(2)
-//       ' # '
-//       '###'
-//   pyramid(3)
-//       '  #  '
-//       ' ### '
-//       '#####'
+// Given a string of words, you need to find the highest scoring word.
+//
+//     Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+//
+//     You need to return the highest scoring word as a string.
+//
+//     If two words score the same, return the word that appears earliest in the original string.
+//
+//     All letters will be lowercase and all inputs will be valid.
 
-function pyramid(n) {
-  for (let i = 0; i < n; i++) {
-    console.log(" ".repeat(n - i - 1) + "#".repeat(2 * i + 1) + " ".repeat(n - i - 1))
-  }
+
+function highestScoringWord(string) {
+  const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  const scoreMapper = string
+      .split(" ")
+      .reduce((result, word) => {
+        const score = word.split("").reduce((res, letter) => res + alphabet.indexOf(letter), 0);
+        return { ...result, [word]: score }
+      }, {});
+
+  return Object.keys(scoreMapper)
+      .reduce((acc, word) => scoreMapper[word] > (scoreMapper[acc] || 0) ? word : acc, "")
 }
 
-function high(x){
-
-}
-
-console.log("result =>", high(""))
+console.log("result =>", highestScoringWord("man i need a taxi up to ubud"));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -50,15 +49,12 @@ console.log("result =>", high(""))
 
 mocha.setup("bdd");
 const { assert } = chai;
-console.log = sinon.spy();
 
-describe("Pyramid", () => {
-  it("pyramid() works", () => {
-    pyramid(3);
-    assert.equal(console.log.callCount, 3);
-    assert.equal(console.log.getCall(0).args[0], "  #  ");
-    assert.equal(console.log.getCall(1).args[0], " ### ");
-    assert.equal(console.log.getCall(2).args[0], "#####");
+describe("highestScoringWord", () => {
+  it("works great", () => {
+    assert.equal(highestScoringWord('man i need a taxi up to ubud'), 'taxi');
+    assert.equal(highestScoringWord('what time are we climbing up the volcano'), 'volcano');
+    assert.equal(highestScoringWord('take me to semynak'), 'semynak');
   });
 });
 

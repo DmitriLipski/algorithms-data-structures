@@ -1,29 +1,12 @@
-// Write a function that accepts a positive number N.
-// The function should console log a pyramid shape
-// with N levels using the # character.  Make sure the
-// pyramid has spaces on both the left and right side
-// --- Examples
-//   pyramid(1)
-//       '#'
-//   pyramid(2)
-//       ' # '
-//       '###'
-//   pyramid(3)
-//       '  #  '
-//       ' ### '
-//       '#####'
+//There is an array with some numbers. All numbers are equal except for one. Try to find it!
 
-function pyramid(n) {
-  for (let i = 0; i < n; i++) {
-    console.log(" ".repeat(n - i - 1) + "#".repeat(2 * i + 1) + " ".repeat(n - i - 1))
-  }
+
+function findUniq(arr) {
+    const sortedArray = arr.sort();
+    return sortedArray[0] === sortedArray[1] ? sortedArray.pop() : sortedArray[0];
 }
 
-function high(x){
-
-}
-
-console.log("result =>", high(""))
+console.log("result =>", findUniq([ 1, 1, 1, 2, 1, 1 ]));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -50,16 +33,13 @@ console.log("result =>", high(""))
 
 mocha.setup("bdd");
 const { assert } = chai;
-console.log = sinon.spy();
 
-describe("Pyramid", () => {
-  it("pyramid() works", () => {
-    pyramid(3);
-    assert.equal(console.log.callCount, 3);
-    assert.equal(console.log.getCall(0).args[0], "  #  ");
-    assert.equal(console.log.getCall(1).args[0], " ### ");
-    assert.equal(console.log.getCall(2).args[0], "#####");
-  });
+describe("findUniq", () => {
+    it("works great", () => {
+        assert.equal(findUniq([ 0, 1, 0 ]), 1);
+        assert.equal(findUniq([ 1, 1, 1, 2, 1, 1 ]), 2);
+        assert.equal(findUniq([ 3, 10, 3, 3, 3 ]), 10);
+    });
 });
 
 mocha.run();
