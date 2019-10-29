@@ -6,11 +6,31 @@
 // linearSearchIncludes(foods, "pizza") --> true
 // linearSearchFind(foods, food => food === "pizza") --> "pizza"
 
-function linearSearchIndexOf(arr, val) {}
+function linearSearchIndexOf(arr, val) {
+  let indexOfElement = -1;
+  arr.forEach((item, index) => {
+    if (item === val) indexOfElement = index;
+  });
 
-function linearSearchIncludes(arr, val) {}
+  return indexOfElement;
+}
 
-function linearSearchFind(arr, cb) {}
+function linearSearchIncludes(arr, val) {
+  let includes = false;
+
+  arr.forEach((item) => {
+    if (item === val) includes = true;
+  });
+  return includes;
+}
+
+function linearSearchFind(arr, cb) {
+  let findItem;
+  arr.forEach((item) => {
+    if (cb(item)) findItem = item;
+  });
+  return findItem;
+}
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -51,7 +71,7 @@ describe("linearSearchIndexOf()", () => {
   });
 });
 
-describe.skip("linearSearchIncludes()", () => {
+describe("linearSearchIncludes()", () => {
   it("returns true if item found", () => {
     assert.equal(linearSearchIncludes(foods, "pizza"), true);
   });
@@ -60,7 +80,7 @@ describe.skip("linearSearchIncludes()", () => {
   });
 });
 
-describe.skip("linearSearchFind()", () => {
+describe("linearSearchFind()", () => {
   it("returns item back if found", () => {
     const kevin = people[0];
     assert.equal(
