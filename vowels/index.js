@@ -7,7 +7,15 @@
 //   vowels('aEiOu') --> 5
 //   vowels('I am a world-class developer using iterations') --> 16
 
-function vowels(str) {}
+function vowels(str) {
+  const vowels = { a: 1, e: 1, i: 1, o: 1, u: 1}
+  return str
+      .toLowerCase()
+      .split("")
+      .reduce((sum, letter) => {
+        return (letter in vowels) ? ++sum : sum;
+      }, 0)
+}
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
