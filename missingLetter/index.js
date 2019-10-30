@@ -8,17 +8,12 @@
 function findMissingLetter(array) {
     const charCodeArray = array.map((letter) => letter.charCodeAt(0));
     let missingCharCode = null;
-    charCodeArray.forEach((charCode, index) => {
-        if (charCode !== charCodeArray[index + 1]) {
-            missingCharCode = charCodeArray[index] + 1;
+    for (let i = 0; i < charCodeArray.length; i++) {
+        if (charCodeArray[i] !== (charCodeArray[i + 1] - 1)) {
+            missingCharCode = charCodeArray[i] + 1;
+            break;
         }
-    });
-    // for (let i = 0; i < charCodeArray.length; i++) {
-    //     if (charCodeArray[i] !== (charCodeArray[i + 1] - 1)) {
-    //         missingCharCode = charCodeArray[i] + 1;
-    //         break;
-    //     }
-    // }
+    }
     return String.fromCharCode(missingCharCode);
 }
 
