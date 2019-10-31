@@ -1,14 +1,16 @@
 
 
-function sortZero(arr) {
-    const regular = arr.reduce((acc, curr) => {
-        return curr !== 0 ? [ ...acc, curr ] : [ ...acc ]
-    }, []);
-    const zero = arr.reduce((acc, curr) => {
-        return curr === 0 ? [ ...acc, curr ] : [ ...acc ]
-    }, []);
-    return regular.concat(zero)
+function reverse(arr) {
+    return arr
+        .trim()
+        .split(" ")
+        .map((word, index) => {
+        return index % 2 === 1 ? word.split("").reverse().join("") : word;
+    })
+        .join(" ")
 }
+
+console.log("result =>", reverse("Reverse this string, please!"));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -36,11 +38,10 @@ function sortZero(arr) {
 mocha.setup("bdd");
 const { assert } = chai;
 
-describe("sortZero", () => {
+describe("reverse", () => {
     it("gets correct answer", () => {
-        assert.deepEqual(sortZero([1, true, 0, "text", false, 0]), [1, true, "text", false, 0, 0]);
-        assert.deepEqual(sortZero([1, 0, 5, 10, 5]), [1, 5, 10, 5, 0]);
-        assert.deepEqual(sortZero(["a", [], "b", 0, "c", null, 0, "f"]), ["a", [], "b", "c", null, "f", 0, 0]);
+        assert.deepEqual(reverse("Reverse this string, please!"), "Reverse siht string, !esaelp");
+        assert.deepEqual(reverse("I really don't like reversing strings!"),"I yllaer don't ekil reversing !sgnirts");
     });
 });
 
