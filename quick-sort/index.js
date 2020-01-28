@@ -1,26 +1,38 @@
 // Implement quick-sort.
 
 function quickSort(list) {
-  if (list.length < 2) return  list;
-  if (list.length === 2) {
-    return  list[0] < list[1] ? [list[0], list[1]] : [list[1], list[0]];
-  }
-  const pivot = list[Math.floor(Math.random() * list.length)];
+  if (list.length === 0) return  [];
+  const pivot = list[0];
   const less = [];
   const greater = [];
 
-  list.forEach((item) => {
+  list.slice(1).forEach((item) => {
     if (item < pivot) {
       less.push(item)
-    } else if (item > pivot){
+    } else {
       greater.push(item)
     }
   });
 
-  return [ ...quickSort(less), pivot, ...quickSort(greater)]
+  return [...quickSort(less), pivot, ...quickSort(greater)]
 }
 
-console.log('result =>', quickSort([7, 10, 3, 5, 3, 12]));
+function quicksort(array) {
+  if (array.length === 0) return [];
+
+  const left = [], right = [], pivot = array[0];
+
+  for (let i = 1; i < array.length; i++) {
+    if(array[i] < pivot)
+      left.push(array[i]);
+    else
+      right.push(array[i]);
+  }
+
+  return quicksort(left).concat(pivot, quicksort(right));
+}
+
+console.log('result =>', quickSort([7, 10, 3, 5, 3, 12, 3]));
 
 // _________ _______  _______ _________   _______  _______  _______  _______  _______
 // \__   __/(  ____ \(  ____ \\__   __/  (  ____ \(  ___  )(  ____ \(  ____ \(  ____ \
@@ -53,7 +65,7 @@ describe("Vowels", () => {
     assert.deepEqual(quickSort([7, 10, 3, 5, 12]), [3, 5, 7, 10, 12]);
   });
   it("sorts correct array with duplicates", () => {
-    assert.deepEqual(quickSort([20, 5, 3, 2, 7, 3]), [2, 3, 3, 5, 7, 20]);
+    assert.deepEqual(quickSort([5, 20, 5, 3, 2, 7, 3]), [2, 3, 3, 5, 5, 7, 20]);
   });
 });
 
